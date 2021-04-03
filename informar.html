@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hello Bulma!</title>
+    <link rel="stylesheet" href="css/mystyles.css">
+    <link rel="stylesheet" href="css/hero_style.css">
+    <script src="js/nuevafoto.js"></script>
+    <script src="https://kit.fontawesome.com/929bc70b66.js" crossorigin="anonymous"></script>
+    <script src="js/new_regiones_comunas.js"></script>
+    <script src="js/avistamiento_singular.js"></script>
+    <script src="js/validacion.js"></script>
+  </head>
+  <body>
+
+  <!--NavBar-->
+  <nav class="navbar is-primary">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="portada.html">
+        <span class="icon has-text-white">
+          <i class="fas fa-bug fa-lg fa-spin"></i>
+        </span> <p class="title has-text-white">Vivan los Bichos</p>
+      </a>
+    
+      <div class="navbar-burger" data-target="navbarShow">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+    <div id="navbarShow" class="navbar-menu">
+      <div class="navbar-start">
+        <a class="navbar-item has-text-light" href="portada.html">
+          Home
+        </a>
+        <a class="navbar-item navbar-item has-text-light" href="informar.html">
+          Informar Avistamiento
+        </a>
+        <a class="navbar-item navbar-item has-text-light" href="avistamientos.html">
+          Listado de Avistamientos
+        </a>
+        <a class="navbar-item navbar-item has-text-light" href="estadisticas.html">
+          Estadísticas
+        </a>
+      </div>
+    </div>
+  </nav>
+  <!--Hero Avistamiento-->
+  <section class="hero is-primary is-small-with-navbar has-background">
+    <img class= "hero-background is-transparent" src="images/hero/pexels-thijs-van-der-weide-792952.jpg">
+    
+    <div class="hero-body">
+      <div>
+        <p class="title is-3"> Informar Avistamiento </p>
+      </div>
+    </div>
+  </section>
+
+  
+  <!-- Form -->
+  <div class="columns is-mobile mt-5 mb-5">
+    <div class="box column is-three-fifths is-offset-one-fifth">
+      <form method="POST" enctype="multipart/form-data" action="#" onsubmit="return validar_todo();">
+        <div class="columns">
+          <div class="mr-3 block column">
+              <h2 class="title">Lugar:</h2> 
+              <div class="field">
+                  <label class="label">Región:</label>
+                  <div class="select">
+                    <select id="region" name="region" onchange="region_change(this)">
+                    </select>
+                  </div>
+              </div>
+              <div class="field">
+                  <label class="label">Comuna:</label>
+                  <div class="select">
+                    <select id="comuna" name="comuna">
+                      <option> Seleccione una región</option>
+                    </select>
+                  </div>
+              </div>
+              <div class="field">
+                  <label class="label">Sector:</label>
+                  <input class="input" type="text" size="200">
+              </div>
+          </div>
+          <div class="ml-3 block column">
+              <h2 class="title">Datos de Contacto:</h2>
+              <div class="field">
+                  <label class="label">Nombre:</label>
+                  <input class="input" type="text">
+              </div>
+              <div class="field">
+                  <label class="label">Email:</label>
+                  <input class="input" type="text">
+              </div>
+              <div class="field">
+                  <label class="label">Número de Celular:</label>
+                  <input class="input" type="text">
+              </div>
+          </div>
+        </div>
+        
+        <div class="avistamientos">
+          <div class="block">
+            <h2 class="title">Información de Avistamiento:</h2>
+            <div class="field">
+                <label class="label">Día hora:</label>
+                <input class="input" type="text" placeholder="año-mes-diahora:minuto" name="dia-hora-avistamiento" id="dia-hora-avistamiento">
+            </div>
+            <div class="field">
+              <label class="label">Tipo:</label>
+              <div class="select">
+                <select class="tipo-avistamiento" value="tipo-avistamiento">
+                  <option value=""> Seleccione un tipo </option>
+                  <option value="nose"> No sé </option>
+                  <option value="insecto"> Insecto </option>
+                  <option value="aracnido"> Arácnido </option>
+                  <option value="miriapodo"> Miriápodo </option>
+                </select>
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">Estado:</label>
+              <div class="select">
+                <select id="comunas" value="estado-avistamiento" class="estado-avistamiento">
+                  <option> No sé </option>
+                  <option> Vivo </option>
+                  <option> Muerto </option>
+                </select>
+              </div>
+            </div>
+            <div class="archivos">
+              <div class="field">
+                <div class="file has-name">
+                    <label class="file-label">
+                        <input class="file-input" type="file" name="resume" onchange="filename_change(this,0)">
+                        <span class="file-cta">
+                        <span class="file-icon">
+                            <i class="fas fa-upload"></i>
+                        </span>
+                        <span class="file-label">
+                            Choose a file…
+                        </span>
+                        </span>
+                        <span class="file-name">
+                          Nombre del Archivo                                                  
+                        </span>
+                    </label>
+                </div>
+              </div>
+            </div>
+            <button class="button mt-4" type="button" onclick="add_photo(this,0)">
+              Agregar otra foto
+            </button>
+          </div>
+        </div>
+        
+        <button class="button is-link mt-3" type="button" onclick="add_new_bug(this)">
+          Informar otro avistamiento en este sector
+        </button>
+
+        <button class="button is-primary mt-3" type="button" onclick=show_modal(this)>
+          Enviar información del avistamiento
+        </button>
+        
+
+        <!-- Modal -->
+        <div class="modal">
+          <div class="modal-background"></div>
+          <div class="modal-card">
+            <header class="modal-card-head">
+              <p class="modal-card-title">Modal title</p>
+            </header>
+            <section class="modal-card-body">
+              ¿Está seguro que desea enviar esta información?
+              <figure class="image is-128x128">
+                <img src="images/cucaMexicana.jpg">
+              </figure>
+              <div class="notification is-warning is-hidden" id="notificacion-formulario">
+                <button type="button" class="delete" onclick="esconder_notificacion()"><span class="icon">
+  <i class="fas fa-times"></i>
+</span></button>
+                <div id="notificacion-formato"></div>
+              </div>
+            </section>
+            <footer class="modal-card-foot">
+              <div class="buttons">
+                <button type="button" class="button is-danger" onclick="hide_modal_form(this)"> No estoy seguro,quiero volver al formulario </button>
+                <button class="button is-success"> Sí,estoy total y absolutamente seguro</button>
+              </div>
+            </footer>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>make_regiones();</script>
+  </body>
+</html>

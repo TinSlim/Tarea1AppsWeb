@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hello Bulma!</title>
+    <link rel="stylesheet" href="css/mystyles.css">
+    <link rel="stylesheet" href="css/hero_style.css">
+    <link rel="stylesheet" href="css/pointer_clas.css">
+    <script src="js/avistamientos.js"></script>
+</head>
+<body>
+
+  <!--NavBar-->
+  <nav class="navbar is-primary">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="portada.html">
+        <span class="icon has-text-white">
+          <i class="fas fa-bug fa-lg fa-spin"></i>
+        </span> <p class="title has-text-white">Vivan los Bichos</p>
+      </a>
+    
+      <div class="navbar-burger" data-target="navbarShow">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+    <div id="navbarShow" class="navbar-menu">
+      <div class="navbar-start">
+        <a class="navbar-item has-text-light" href="portada.html">
+          Home
+        </a>
+        <a class="navbar-item navbar-item has-text-light" href="informar.html">
+          Informar Avistamiento
+        </a>
+        <a class="navbar-item navbar-item has-text-light" href="avistamientos.html">
+          Listado de Avistamientos
+        </a>
+        <a class="navbar-item navbar-item has-text-light" href="estadisticas.html">
+          Estadísticas
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!--Hero Avistamiento-->
+  <section class="hero is-primary is-small-with-navbar has-background">
+    <img class= "hero-background is-transparent" src="images/hero/pexels-pixabay-144243.jpg">
+    
+    <div class="hero-body">
+      <div>
+        <p class="title is-3"> Listado de Avistamientos</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tabla de avistamientos -->
+    <div class="columns is-mobile mt-5 mb-5">
+        <div class="box column is-three-fifths is-offset-one-fifth">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Fecha - hora</th>
+                <th>Comuna</th>
+                <th>Sector</th>
+                <th>Nombre contacto</th>
+                <th>total avistamientos</th>
+                <th>total fotos</th>
+              </tr>
+            </thead>
+            <tbody>
+                <tr class="pointer" onmouseout="deselect_row(this)" onmousemove="select_row(this)" onclick="window.location='avistamientos_insectos/avistamiento_01.html'">
+                  <th>2021-03-29 13:21</th>
+                  <td>La Florida</td>
+                  <td>Vicuña Mackenna</td>
+                  <td>insecto</td>
+                  <td> 19 </td>
+                  <td></td>
+                </tr>
+              
+              <tr class="pointer" onmouseout="deselect_row(this)" onmousemove="select_row(this)" onclick="window.location='avistamientos_insectos/avistamiento_02.html'">
+                <th>Providencia</th>
+                <td>Plaza Italia</td>
+                <td>arácnido</td>
+                <td>8</td>
+                <td></td>
+                <td></td>
+              </tr>
+
+              <tr class="pointer" onmouseout="deselect_row(this)" onmousemove="select_row(this)" onclick="window.location='avistamientos_insectos/avistamiento_03.html'">
+                <th>Providencia</th>
+                <td>Plaza Italia</td>
+                <td>arácnido</td>
+                <td>8</td>
+                <td></td>
+                <td></td>
+              </tr>
+
+              <tr class="pointer" onmouseout="deselect_row(this)" onmousemove="select_row(this)" onclick="window.location='avistamientos_insectos/avistamiento_04.html'">
+                <th>Providencia</th>
+                <td>Plaza Italia</td>
+                <td>arácnido</td>
+                <td>8</td>
+                <td></td>
+                <td></td>
+              </tr>
+
+              <tr class="pointer" onmouseout="deselect_row(this)" onmousemove="select_row(this)" onclick="window.location='avistamientos_insectos/avistamiento_05.html'">
+                <th>Providencia</th>
+                <td>Plaza Italia</td>
+                <td>arácnido</td>
+                <td>8</td>
+                <td></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+    </div>
+</body>
+</html>
