@@ -9,7 +9,7 @@ function valida_region(id_region){
     if (region_actual == ''  || region_actual == -1){
         //alert("Seleccione una región");
         // Caso cuando no es correcta la región
-        corregir_mensaje += "<li> Seleccione una región </li>"
+        corregir_mensaje += "<li> Seleccione una región </li>";
         return false;
     }
     return true;
@@ -20,7 +20,7 @@ function valida_comuna(id_comuna){
     var comuna = document.getElementById(id_comuna);
     var comuna_actual = comuna.value;
     if (comuna_actual == ''  || comuna_actual == -1){
-        alert("Seleccione una comuna");
+        corregir_mensaje += "<li> Seleccione una comuna </li>";
         // Caso cuando no es correcta la comuna
         return false;
     }
@@ -38,11 +38,11 @@ function valida_sector(id_sector){
         return true;
     }
     if (largo_sector > 200){
-        alert("Sector escrito supera los 100 carácteres");
+        corregir_mensaje += "<li> Sector escrito supera los 100 carácteres </li>";
         return false;
     }
     if (!regex.test(sector_actual)){ // TODO Ver esta reestricción
-        alert("El sector solo puede contener letras");
+        corregir_mensaje += "<li> El sector solo puede contener letras </li>";
         return false;
     }
     return true;
@@ -54,15 +54,15 @@ function validar_nombre(id_nombre) {
     var largo_nombre = nombre_actual.length;
     var regex = /^(([A-ZÜÑÁÉÍÓÚ]+([a-záéíóúüñ]*))(\s[A-ZÜÑÁÉÍÓÚ]+([a-záéíóúüñ]*))*)/; // Nombres con caracteres especiales
     if (nombre_actual == "") {
-        alert("Ingrese un nombre")
+        corregir_mensaje += "<li> Ingrese un nombre </li>";
         return false;
     }
     else if (largo_nombre > 100) {
-        alert("Largo no válido");
+        corregir_mensaje += "<li> Largo no válido </li>";
         return false;
     }
     else if (!regex.text(nombre_actual)) {
-        alert("Formato no válido");
+        corregir_mensaje += "<li> Formato no válido </li>";
         return false;
     }
     return true;
@@ -74,11 +74,11 @@ function validar_email(id_correo) {
     var regex = /^[^@]+@[^@]+\.[a-zA-Z]{2,}$/ // TODO revisar este regex después
 
     if (correo_actual == ""){
-        alert("Ingrese su email");
+        corregir_mensaje += "<li> Ingrese su email </li>";
         return false;
     }
     else if (!regex.test(correo_actual)){
-        alert("El correo electrónico es inválido");
+        corregir_mensaje += "<li> El correo electrónico es inválido </li>";
         return false;
     }
     return true;
@@ -92,44 +92,53 @@ function validar_celular(id_celular) {
         return true; // No escribió celular
     }
     else if (!regex.test(celular_actual)){
-        alert("El número de celular es inválido")
+        corregir_mensaje += "<li> El número de celular es inválido </li>";
         return false;
     }
     return true;
 }
 
-function validar_fecha(id_fecha) { // Formato año-mes-diahora:minuto 2000-09-1112:11
-    var fecha = document.getElementById(id_fecha)
-    var fecha_actual = fecha.value;
+function validar_fecha(clase_fecha) { // Formato año-mes-diahora:minuto 2000-09-1112:11
+    var nodos_fechas = document.getElementsByClassName(clase_fecha);
     var regex = /\d{4}-((0[1-9])|(1[0-2]))-(([0-2][1-9])|(3[01]))(([01][0-9])|(2[0-4])):(([0-5][0-9])|(60))/; // regex fecha
-
-    alert(fecha_actual);
-    if (fecha_actual == "") {
-        corregir_mensaje += "<li> Ingrese una fecha </li>"
-        return false;
-    }
-    if (!regex.test(fecha_actual)) {
-        corregir_mensaje += "<li> Fecha Inválida </li>"
-        return false;
-    }
-    anho = fecha_actual.substring(0,4)
-    mes = fecha_actual.substring(5,7)
-    dia = fecha_actual.substring(8,10)
-    anho_numero = parseInt(anho);
-    // Febrero
-    if ((mes == "02") && (parseInt(dia)<=29) ){
-        if (dia == "29") {
-            if ((((anho_numero % 4 == 0) && (anho_numero % 100 != 0 )) || (anho_numero % 400 == 0))) {
-                return true;
-            }
-            alert("Fecha inválida")
+    for (nodo of nodos_fechas) {
+        fecha_actual = nodo.value;
+        
+        // Fecha_vacía
+        if (fecha_actual == "") {
+            corregir_mensaje += "<li> Ingrese una fecha </li>"
             return false;
         }
-        return true;
-    }
-    else if ((mes in meses_30_dias) && (dia=="31")){
-        alert("Fecha inválida")
-        return false;
+        // Formato incorrecto
+        if (!regex.test(fecha_actual)) {
+            corregir_mensaje += "<li> Fecha Inválida </li>"
+            return false;
+        }
+
+        anho = fecha_actual.substring(0,4)
+        mes = fecha_actual.substring(5,7)
+        dia = fecha_actual.substring(8,10)
+        anho_numero = parseInt(anho);
+        // Febrero
+        
+        if (mes == "02"){
+            if (parseInt(dia) > 29) {
+                corregir_mensaje += "<li> Fecha inválida </li>";
+                return false;
+            } 
+            if (dia == "29") {
+                if ((((anho_numero % 4 == 0) && (anho_numero % 100 != 0 )) || (anho_numero % 400 == 0))) {
+                    // Es biciesto
+                    return true;
+                }
+                corregir_mensaje += "<li> Fecha inválida </li>";
+                return false;
+            }
+        }
+        else if ((mes in meses_30_dias) && (dia=="31")){
+            corregir_mensaje += "<li> Fecha inválida </li>";
+            return false;
+        }
     }
     return true;
 }
@@ -137,14 +146,15 @@ function validar_fecha(id_fecha) { // Formato año-mes-diahora:minuto 2000-09-11
 function validar_tipo(clase_tipo) {
     var tipos_lista = document.getElementsByClassName(clase_tipo);
     var cantidad_tipos = tipos_lista.length;
+    
     for (tipo of tipos_lista) {
         tipo_actual = tipo.value;
         if (tipo_actual == ''  || tipo_actual == -1){
             if (cantidad_tipos > 1) {
-                alert("Seleccione tipo en todos los avistamientos");
+                corregir_mensaje += "<li> Seleccione tipo en todos los avistamientos </li>";
             }
             else {
-                alert("Seleccione un tipo")
+                corregir_mensaje += "<li> Seleccione un tipo </li>";
             }
             return false;
         }
@@ -154,17 +164,47 @@ function validar_tipo(clase_tipo) {
 
 function validar_estado(clase_estado) {
     var estados_lista = document.getElementsByClassName(clase_estado);
-    var cantidad_estados = estado_lista.length;
+    var cantidad_estados = estados_lista.length;
     for (estado of estados_lista) {
         estado_actual = estado.value;
         if (estado_actual == ''  || estado_actual == -1){
             if (cantidad_estados > 1) {
-                alert("Seleccione estado en todos los avistamientos");
+                corregir_mensaje += "<li> Seleccione estado en todos los avistamientos </li>";
             }
             else {
-                alert("Seleccione un estado")
+                corregir_mensaje += "<li> Seleccione un estado </li>";
             }
             return false;
+        }
+    }
+    return true;
+}
+
+function validar_imagenes(clase_imagen) {
+    var nodos_lista_imagenes = document.getElementsByClassName(clase_imagen);
+    var cantidad_imagenes = nodos_lista_imagenes.length;
+    var regex = /\S*.(?:jpg|jpeg|png)/; // regex imagen
+    for (nodo of nodos_lista_imagenes) {
+        imagen = nodo.value;
+        if (imagen.length < 1) {
+            if (cantidad_imagenes > 1) {
+                corregir_mensaje += "<li> No se adjuntaron todas las imágenes </li>"; //TODO Revisar esto
+                return false;
+            }
+            else {
+                corregir_mensaje += "<li> No se adjuntó la imagen </li>"; // TODO Revisar esto
+                return false;
+            }
+        }
+        if (!regex.test(imagen)) {
+            if (cantidad_imagenes > 1) {
+                corregir_mensaje += "<li> El formato de alguna imagen no es válido </li>";
+                return false;
+            }
+            else {
+                corregir_mensaje += "<li> El formato de la imagen no es válido </li>";
+                return false;
+            }
         }
     }
     return true;
@@ -186,19 +226,23 @@ function agregar_correcciones() {
     nodo_notificacion.innerHTML = corregir_mensaje;
 }
 
-function validar_todo () {
+function validar_todo() {
     corregir_mensaje = "";
-    validacion_fecha = validar_fecha("dia-hora-avistamiento");
-    var resultado =  validacion_fecha;
-    //validar_tipo("tipo-avistamiento");
-    
-    
-    if (!resultado) {
-        agregar_correcciones();
-        mostrar_notificacion();
-
+    var resultado = true;
+    var check_list = [valida_region("region"), valida_comuna("comuna"), valida_sector("sector"), validar_nombre("nombre"),
+    validar_email("email"), validar_celular("celular"), validar_fecha("dia-hora-avistamiento"), validar_tipo("tipo-avistamiento"),
+    validar_estado("estado-avistamiento"), validar_imagenes("foto-avistamiento")];
+    for (value of check_list) {
+        if (!value) {
+            resultado = false;
+            break;
+        }
     }
-    return false;
+    if (!resultado) {
+        mostrar_notificacion();
+        agregar_correcciones();
+    }
+    return resultado;
 }
 
 
