@@ -85,10 +85,10 @@
   width: 0.625em; }
 
 .pagination:not(:last-child), .box:not(:last-child), .table:not(:last-child), .table-container:not(:last-child), .title:not(:last-child),
-.subtitle:not(:last-child), .notification:not(:last-child) {
+.subtitle:not(:last-child), .notification:not(:last-child), .block:not(:last-child), .highlight:not(:last-child) {
   margin-bottom: 1.5rem; }
 
-.modal-close {
+.modal-close, .delete {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -114,7 +114,7 @@
   position: relative;
   vertical-align: top;
   width: 20px; }
-  .modal-close::before, .modal-close::after {
+  .modal-close::before, .delete::before, .modal-close::after, .delete::after {
     background-color: white;
     content: "";
     display: block;
@@ -123,31 +123,31 @@
     top: 50%;
     transform: translateX(-50%) translateY(-50%) rotate(45deg);
     transform-origin: center center; }
-  .modal-close::before {
+  .modal-close::before, .delete::before {
     height: 2px;
     width: 50%; }
-  .modal-close::after {
+  .modal-close::after, .delete::after {
     height: 50%;
     width: 2px; }
-  .modal-close:hover, .modal-close:focus {
+  .modal-close:hover, .delete:hover, .modal-close:focus, .delete:focus {
     background-color: rgba(10, 10, 10, 0.3); }
-  .modal-close:active {
+  .modal-close:active, .delete:active {
     background-color: rgba(10, 10, 10, 0.4); }
-  .is-small.modal-close {
+  .is-small.modal-close, .is-small.delete {
     height: 16px;
     max-height: 16px;
     max-width: 16px;
     min-height: 16px;
     min-width: 16px;
     width: 16px; }
-  .is-medium.modal-close {
+  .is-medium.modal-close, .is-medium.delete {
     height: 24px;
     max-height: 24px;
     max-width: 24px;
     min-height: 24px;
     min-width: 24px;
     width: 24px; }
-  .is-large.modal-close {
+  .is-large.modal-close, .is-large.delete {
     height: 32px;
     max-height: 32px;
     max-width: 32px;
@@ -155,7 +155,7 @@
     min-width: 32px;
     width: 32px; }
 
-.button.is-loading::after, .select.is-loading::after, .control.is-loading::after {
+.button.is-loading::after, .loader, .select.is-loading::after, .control.is-loading::after {
   animation: spinAround 500ms infinite linear;
   border: 2px solid #dbdbdb;
   border-radius: 290486px;
@@ -2666,6 +2666,36 @@ div.icon-text {
     .notification.is-danger.is-light {
       background-color: #feecf0;
       color: #cc0f35; }
+
+.heading {
+  display: block;
+  font-size: 11px;
+  letter-spacing: 1px;
+  margin-bottom: 5px;
+  text-transform: uppercase; }
+
+.highlight {
+  font-weight: 400;
+  max-width: 100%;
+  overflow: hidden;
+  padding: 0; }
+  .highlight pre {
+    overflow: auto;
+    max-width: 100%; }
+
+.number {
+  align-items: center;
+  background-color: whitesmoke;
+  border-radius: 290486px;
+  display: inline-flex;
+  font-size: 1.25rem;
+  height: 2em;
+  justify-content: center;
+  margin-right: 1.5rem;
+  min-width: 2.5em;
+  padding: 0.25rem 0.5rem;
+  text-align: center;
+  vertical-align: top; }
 
 /* Bulma Form */
 .input, .textarea, .select select {
@@ -5544,7 +5574,7 @@ a.has-text-danger-dark:hover, a.has-text-danger-dark:focus {
   .hero.is-white {
     background-color: white;
     color: #0a0a0a; }
-    .hero.is-white a:not(.button):not(.dropdown-item):not(.tag):not(.pagination-link),
+    .hero.is-white a:not(.button):not(.dropdown-item):not(.tag):not(.pagination-link.is-current),
     .hero.is-white strong {
       color: inherit; }
     .hero.is-white .title {
@@ -5588,7 +5618,7 @@ a.has-text-danger-dark:hover, a.has-text-danger-dark:focus {
   .hero.is-black {
     background-color: #0a0a0a;
     color: white; }
-    .hero.is-black a:not(.button):not(.dropdown-item):not(.tag):not(.pagination-link),
+    .hero.is-black a:not(.button):not(.dropdown-item):not(.tag):not(.pagination-link.is-current),
     .hero.is-black strong {
       color: inherit; }
     .hero.is-black .title {
@@ -5632,7 +5662,7 @@ a.has-text-danger-dark:hover, a.has-text-danger-dark:focus {
   .hero.is-light {
     background-color: whitesmoke;
     color: rgba(0, 0, 0, 0.7); }
-    .hero.is-light a:not(.button):not(.dropdown-item):not(.tag):not(.pagination-link),
+    .hero.is-light a:not(.button):not(.dropdown-item):not(.tag):not(.pagination-link.is-current),
     .hero.is-light strong {
       color: inherit; }
     .hero.is-light .title {
@@ -5676,7 +5706,7 @@ a.has-text-danger-dark:hover, a.has-text-danger-dark:focus {
   .hero.is-dark {
     background-color: #363636;
     color: #fff; }
-    .hero.is-dark a:not(.button):not(.dropdown-item):not(.tag):not(.pagination-link),
+    .hero.is-dark a:not(.button):not(.dropdown-item):not(.tag):not(.pagination-link.is-current),
     .hero.is-dark strong {
       color: inherit; }
     .hero.is-dark .title {
@@ -5720,7 +5750,7 @@ a.has-text-danger-dark:hover, a.has-text-danger-dark:focus {
   .hero.is-primary {
     background-color: #8bc700;
     color: #fff; }
-    .hero.is-primary a:not(.button):not(.dropdown-item):not(.tag):not(.pagination-link),
+    .hero.is-primary a:not(.button):not(.dropdown-item):not(.tag):not(.pagination-link.is-current),
     .hero.is-primary strong {
       color: inherit; }
     .hero.is-primary .title {
@@ -5764,7 +5794,7 @@ a.has-text-danger-dark:hover, a.has-text-danger-dark:focus {
   .hero.is-link {
     background-color: #3273dc;
     color: #fff; }
-    .hero.is-link a:not(.button):not(.dropdown-item):not(.tag):not(.pagination-link),
+    .hero.is-link a:not(.button):not(.dropdown-item):not(.tag):not(.pagination-link.is-current),
     .hero.is-link strong {
       color: inherit; }
     .hero.is-link .title {
@@ -5808,7 +5838,7 @@ a.has-text-danger-dark:hover, a.has-text-danger-dark:focus {
   .hero.is-info {
     background-color: #3298dc;
     color: #fff; }
-    .hero.is-info a:not(.button):not(.dropdown-item):not(.tag):not(.pagination-link),
+    .hero.is-info a:not(.button):not(.dropdown-item):not(.tag):not(.pagination-link.is-current),
     .hero.is-info strong {
       color: inherit; }
     .hero.is-info .title {
@@ -5852,7 +5882,7 @@ a.has-text-danger-dark:hover, a.has-text-danger-dark:focus {
   .hero.is-success {
     background-color: #48c774;
     color: #fff; }
-    .hero.is-success a:not(.button):not(.dropdown-item):not(.tag):not(.pagination-link),
+    .hero.is-success a:not(.button):not(.dropdown-item):not(.tag):not(.pagination-link.is-current),
     .hero.is-success strong {
       color: inherit; }
     .hero.is-success .title {
@@ -5896,7 +5926,7 @@ a.has-text-danger-dark:hover, a.has-text-danger-dark:focus {
   .hero.is-warning {
     background-color: #ffdd57;
     color: rgba(0, 0, 0, 0.7); }
-    .hero.is-warning a:not(.button):not(.dropdown-item):not(.tag):not(.pagination-link),
+    .hero.is-warning a:not(.button):not(.dropdown-item):not(.tag):not(.pagination-link.is-current),
     .hero.is-warning strong {
       color: inherit; }
     .hero.is-warning .title {
@@ -5940,7 +5970,7 @@ a.has-text-danger-dark:hover, a.has-text-danger-dark:focus {
   .hero.is-danger {
     background-color: #f14668;
     color: #fff; }
-    .hero.is-danger a:not(.button):not(.dropdown-item):not(.tag):not(.pagination-link),
+    .hero.is-danger a:not(.button):not(.dropdown-item):not(.tag):not(.pagination-link.is-current),
     .hero.is-danger strong {
       color: inherit; }
     .hero.is-danger .title {
