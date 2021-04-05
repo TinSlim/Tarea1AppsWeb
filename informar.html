@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -48,11 +48,10 @@
   </nav>
   <!--Hero Avistamiento-->
   <section class="hero is-primary is-small-with-navbar has-background">
-    <img class= "hero-background is-transparent" src="images/hero/pexels-thijs-van-der-weide-792952.jpg">
-    
+    <img class= "hero-background is-transparent" src="images/hero/pexels-thijs-van-der-weide-792952.jpg" alt="Chinita de fondo">
     <div class="hero-body">
       <div>
-        <p class="title is-3"> Informar Avistamiento </p>
+        <h2 class="title is-3"> Informar Avistamiento </h2>
       </div>
     </div>
   </section>
@@ -112,7 +111,7 @@
             <div class="field">
               <label class="label">Tipo:</label>
               <div class="select">
-                <select class="tipo-avistamiento" value="tipo-avistamiento">
+                <select class="tipo-avistamiento" name="tipo-avistamiento">
                   <option value=""> Seleccione un tipo </option>
                   <option value="nose"> No sé </option>
                   <option value="insecto"> Insecto </option>
@@ -124,7 +123,7 @@
             <div class="field">
               <label class="label">Estado:</label>
               <div class="select">
-                <select id="comunas" value="estado-avistamiento" class="estado-avistamiento">
+                <select id="comunas" name="estado-avistamiento" class="estado-avistamiento">
                   <option value=""> Seleccione un estado </option>
                   <option> No sé </option>
                   <option> Vivo </option>
@@ -174,12 +173,12 @@
           <div class="modal-background"></div>
           <div class="modal-card">
             <header class="modal-card-head">
-              <p class="modal-card-title">Modal title</p>
+              <h2 class="modal-card-title">Modal title</h2>
             </header>
             <section class="modal-card-body">
-              ¿Está seguro que desea enviar esta información?
+              <h2>¿Está seguro que desea enviar esta información? </h2>
               <figure class="image is-128x128">
-                <img src="images/cucaMexicana.jpg">
+                <img src="images/cucaMexicana.jpg" alt="Cucaracha con sombrero mexicano">
               </figure>
               <div class="notification is-warning is-hidden" id="notificacion-formulario">
                 <button type="button" class="delete" onclick="esconder_notificacion()"><span class="icon">
