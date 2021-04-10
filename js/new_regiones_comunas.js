@@ -21,6 +21,7 @@ var comunas = {
     "Región Metropolitana de Santiago" : ["Colina", "Lampa", "Tiltil", "Pirque", "Puente Alto", "San José de Maipo", "Buin", "Calera de Tango", "Paine", "San Bernardo", "Alhué", "Curacaví", "María Pinto", "Melipilla", "San Pedro", "Cerrillos", "Cerro Navia", "Conchalí", "El Bosque", "Estación Central", "Huechuraba", "Independencia", "La Cisterna", "La Granja", "La Florida", "La Pintana", "La Reina", "Las Condes", "Lo Barnechea", "Lo Espejo", "Lo Prado", "Macul", "Maipú", "Ñuñoa", "Pedro Aguirre Cerda", "Peñalolén", "Providencia", "Pudahuel", "Quilicura", "Quinta Normal", "Recoleta", "Renca", "San Miguel", "San Joaquín", "San Ramón", "Santiago", "Vitacura", "El Monte", "Isla de Maipo", "Padre Hurtado", "Peñaflor", "Talagante"]
 }
 
+
 /*
 * Genera las opciones de las regiones para el dropdown del formulario.
 */
@@ -34,11 +35,12 @@ function make_regiones() {
     node.innerHTML = html_inject;
 }
 
-/*
-* Se ejecuta cuando se cambia la región en el formulario, actualiza el dropdown de comunas
-* con las que pertenecen a la nueva región
-* @param node : Nodo dropdown de regiones
-*/
+
+/**
+ * Se ejecuta cuando se cambia la región en el formulario, actualiza el dropdown de comunas
+ * con las que pertenecen a la nueva región
+ * @param {dropdown regiones} node 
+ */
 function region_change(node) {
     comunas_node = document.getElementById("comuna");
     options = '<option value=""> Seleccione una Comuna </option>';
@@ -50,5 +52,3 @@ function region_change(node) {
     }
     comunas_node.innerHTML = options;
 }
-
-

@@ -4,8 +4,8 @@ counter_bichos = 0
 
 /**
  * Añade otro input de archivo para el avistamiento del nodo.
- * @param {*} node Nodo del botón para agregar nueva imagen.
- * @param {*} number Número del avistamiento del formulario.
+ * @param {botón para agregar nueva imagen} node
+ * @param {Número del avistamiento del formulario} number
  */
 
 function add_photo(node,number) {
@@ -37,7 +37,7 @@ function add_photo(node,number) {
 
 /**
  * Cambia el nombre que aparece en el input de archivo por el archivo ingresado.
- * @param {*} node Nodo del input de tipo archivo.
+ * @param {input de tipo archivo} node
  */
 function filename_change(node) {
     node.parentNode.getElementsByClassName("file-name")[0].innerHTML = node.files[0].name;
@@ -46,7 +46,7 @@ function filename_change(node) {
 
 /**
  * Añade un nuevo avistamiento de insecto.
- * @param {*} node Nodo del botón para agregar un nuevo avistamiento.
+ * @param {botón para agregar un nuevo avistamiento} node
  */
 function add_new_bug(node) {
     counter_bichos += 1;
