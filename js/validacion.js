@@ -7,8 +7,6 @@ function valida_region(id_region){
     var region = document.getElementById(id_region);
     var region_actual = region.value;
     if (region_actual == ''  || region_actual == -1){
-        //alert("Seleccione una región");
-        // Caso cuando no es correcta la región
         corregir_mensaje += "<li> Seleccione una región </li>";
         return false;
     }
@@ -31,7 +29,7 @@ function valida_comuna(id_comuna){
 function valida_sector(id_sector){
     var sector = document.getElementById(id_sector);
     var sector_actual = sector.value;
-    var regex = /^[A-z]+(\s[A-z]+)*/; // Revisar regex
+    var regex = /^[A-zÜÑÁÉÍÓÚáéíóúüñ0-9]+(\s[A-zÜÑÁÉÍÓÚáéíóúüñ0-9]+)*/;
     var largo_sector = sector_actual.length;
     // No se escribió un sector, ok pues es OPCIONAL
     if (sector_actual == ""){
@@ -41,8 +39,8 @@ function valida_sector(id_sector){
         corregir_mensaje += "<li> Sector escrito supera los 100 carácteres </li>";
         return false;
     }
-    if (!regex.test(sector_actual)){ // TODO Ver esta reestricción
-        corregir_mensaje += "<li> El sector solo puede contener letras </li>";
+    if (!regex.test(sector_actual)){
+        corregir_mensaje += "<li> El sector solo puede contener letras, números y espacios entre palabras</li>";
         return false;
     }
     return true;
@@ -52,7 +50,7 @@ function validar_nombre(id_nombre) {
     var nombre = document.getElementById(id_nombre);
     var nombre_actual = nombre.value;
     var largo_nombre = nombre_actual.length;
-    var regex = /^(([A-ZÜÑÁÉÍÓÚ]+([a-záéíóúüñ]*))(\s[A-ZÜÑÁÉÍÓÚ]+([a-záéíóúüñ]*))*)/; // Nombres con caracteres especiales
+    var regex = /^(([A-ZÜÑÁÉÍÓÚ]+([a-záéíóúüñ]*))(\s[A-ZÜÑÁÉÍÓÚ]+([a-záéíóúüñ]*))*)/;// Nombres con caracteres especiales
     if (nombre_actual == "") {
         corregir_mensaje += "<li> Ingrese un nombre </li>";
         return false;
@@ -62,7 +60,7 @@ function validar_nombre(id_nombre) {
         return false;
     }
     else if (!regex.text(nombre_actual)) {
-        corregir_mensaje += "<li> Formato no válido </li>";
+        corregir_mensaje += "<li> Los nombres solo puede tener letras y espacios entre ellos, también deben empezar con mayúsculas</li>";
         return false;
     }
     return true;
@@ -100,7 +98,7 @@ function validar_celular(id_celular) {
 
 function validar_fecha(clase_fecha) { // Formato año-mes-diahora:minuto 2000-09-1112:11
     var nodos_fechas = document.getElementsByClassName(clase_fecha);
-    var regex = /\d{4}-((0[1-9])|(1[0-2]))-(([0-2][1-9])|(3[01]))(([01][0-9])|(2[0-4])):(([0-5][0-9])|(60))/; // regex fecha
+    var regex = /\d{4}-((0[1-9])|(1[0-2]))-(([0-2][1-9])|(3[01])) (([01][0-9])|(2[0-3])):(([0-5][0-9])|(60))/; // regex fecha
     for (nodo of nodos_fechas) {
         fecha_actual = nodo.value;
         
@@ -232,17 +230,46 @@ function validar_todo() {
     var check_list = [valida_region("region"), valida_comuna("comuna"), valida_sector("sector"), validar_nombre("nombre"),
     validar_email("email"), validar_celular("celular"), validar_fecha("dia-hora-avistamiento"), validar_tipo("tipo-avistamiento"),
     validar_estado("estado-avistamiento"), validar_imagenes("foto-avistamiento")];
+    
     for (value of check_list) {
         if (!value) {
             resultado = false;
             break;
         }
     }
+
     if (!resultado) {
         mostrar_notificacion();
         agregar_correcciones();
+        return resultado;
     }
     return resultado;
 }
 
 
+function obtenerFecha() {
+    var hoy = new Date();
+    var mes = hoy.getMonth() + 1;
+    if (mes < 10) {
+        mes = '0' + mes;
+    }
+    var dia = hoy.getDate();
+    if (dia < 10) {
+        dia = '0' + dia;
+    }
+    var hora = hoy.getHours();
+    if (hora < 10) {
+        hora = '0' + hora;
+    }
+    var minuto = hoy.getMinutes();
+    if (minuto < 10) {
+        minuto = '0' + minuto;
+    }
+    var fecha = hoy.getFullYear() + '-' + mes + '-' + dia + ' ' + hora + ':' + minuto;
+    return fecha;
+}
+
+function actualizarFechaUno() {
+    nodo = document.getElementById("dia-hora-avistamiento-1");
+    nodo.value = obtenerFecha();
+}
