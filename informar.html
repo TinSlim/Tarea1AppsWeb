@@ -68,6 +68,7 @@
                   <label class="label">Región:</label>
                   <div class="select">
                     <select id="region" name="region" onchange="region_change(this)">
+                      <option value=""> Seleccione una región</option>
                     </select>
                   </div>
               </div>
@@ -89,6 +90,7 @@
               <div class="field">
                   <label class="label">Nombre:</label>
                   <input id="nombre" class="input" type="text" name="nombre" size="100" maxlength="200">
+                  <p class="help">Debe empezar con mayúscula y en caso de ser más de uno separarse con espacios</p>
               </div>
               <div class="field">
                   <label class="label">Email:</label>
@@ -96,7 +98,7 @@
               </div>
               <div class="field">
                   <label class="label">Número de Celular:</label>
-                  <input id="celular" class="input" type="text" name="celular" size="15">
+                  <input id="celular" class="input" type="text" name="celular" size="15" placeholder="Ejemplo: +569XXXXXXXX">
               </div>
           </div>
         </div>
@@ -106,7 +108,7 @@
             <h2 class="title">Información de Avistamiento:</h2>
             <div class="field">
                 <label class="label">Día hora:</label>
-                <input class="input dia-hora-avistamiento" type="text" placeholder="año-mes-diahora:minuto" name="dia-hora-avistamiento" size="20">
+                <input id="dia-hora-avistamiento-1" class="input dia-hora-avistamiento" type="text" placeholder="año-mes-diahora:minuto" name="dia-hora-avistamiento" size="20">
             </div>
             <div class="field">
               <label class="label">Tipo:</label>
@@ -123,11 +125,11 @@
             <div class="field">
               <label class="label">Estado:</label>
               <div class="select">
-                <select id="comunas" name="estado-avistamiento" class="estado-avistamiento">
+                <select name="estado-avistamiento" class="estado-avistamiento">
                   <option value=""> Seleccione un estado </option>
-                  <option> No sé </option>
-                  <option> Vivo </option>
-                  <option> Muerto </option>
+                  <option value="nose"> No sé </option>
+                  <option value="vivo"> Vivo </option>
+                  <option value="muerto"> Muerto </option>
                 </select>
               </div>
             </div>
@@ -136,7 +138,7 @@
                 <label class="label">Imagen:</label>
                 <div class="file has-name">
                     <label class="file-label">
-                        <input class="file-input foto-avistamiento" type="file" name="foto-avistamiento" onchange="filename_change(this,0)">
+                        <input class="file-input foto-avistamiento" type="file" name="foto-avistamiento" onchange="filename_change(this)">
                         <span class="file-cta">
                         <span class="file-icon">
                             <i class="fas fa-upload"></i>
@@ -182,8 +184,8 @@
               </figure>
               <div class="notification is-warning is-hidden" id="notificacion-formulario">
                 <button type="button" class="delete" onclick="esconder_notificacion()"><span class="icon">
-  <i class="fas fa-times"></i>
-</span></button>
+                <i class="fas fa-times"></i>
+              </span></button>
                 <div id="notificacion-formato"></div>
               </div>
             </section>
@@ -223,6 +225,9 @@
   </footer>
 
   <!-- Make regiones -->
-  <script>make_regiones();</script>
+  <script>
+  make_regiones();
+  actualizarFechaUno();
+  </script>
   </body>
 </html>

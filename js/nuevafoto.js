@@ -16,7 +16,7 @@ function add_photo(node,number) {
         new_node.innerHTML = `
         <div class="file has-name">
                 <label class="file-label">
-                    <input class="file-input foto-avistamiento" type="file" name="foto-avistamiento-${number}" onchange="filename_change(this,0)" required>
+                    <input class="file-input foto-avistamiento" type="file" name="foto-avistamiento-${number}" onchange="filename_change(this,0)">
                     <span class="file-cta">
                     <span class="file-icon">
                         <i class="fas fa-upload"></i>
@@ -58,12 +58,12 @@ function add_new_bug(node) {
     <h2 class="title">Información de Avistamiento:</h2>
             <div class="field">
                 <label class="label">Día hora:</label>
-                <input class="input dia-hora-avistamiento" type="text" placeholder="año-mes-diahora:minuto" name="dia-hora-avistamiento" value=${fecha} required>
+                <input class="input dia-hora-avistamiento" type="text" placeholder="año-mes-diahora:minuto" name="dia-hora-avistamiento" value='${fecha}' size="20">
             </div>
             <div class="field">
               <label class="label">Tipo:</label>
               <div class="select">
-                <select class="tipo-avistamiento" value="tipo-avistamiento" required>
+                <select class="tipo-avistamiento" value="tipo-avistamiento">
                   <option value=""> Seleccione un tipo </option>
                   <option value="nose"> No sé </option>
                   <option value="insecto"> Insecto </option>
@@ -75,7 +75,7 @@ function add_new_bug(node) {
             <div class="field">
               <label class="label">Estado:</label>
               <div class="select">
-                <select value="estado-avistamiento" class="estado-avistamiento" required>
+                <select value="estado-avistamiento" class="estado-avistamiento">
                   <option value=""> Seleccione un estado </option>
                   <option value="nose"> No sé </option>
                   <option value="vivo"> Vivo </option>
@@ -88,7 +88,7 @@ function add_new_bug(node) {
                 <label class="label">Imagen:</label>
                 <div class="file has-name">
                     <label class="file-label">
-                        <input class="file-input foto-avistamiento" type="file" name="foto-avistamiento" onchange="filename_change(this)" required>
+                        <input class="file-input foto-avistamiento" type="file" name="foto-avistamiento" onchange="filename_change(this)">
                         <span class="file-cta">
                         <span class="file-icon">
                             <i class="fas fa-upload"></i>

@@ -59,8 +59,8 @@ function validar_nombre(id_nombre) {
         corregir_mensaje += "<li> Largo no válido </li>";
         return false;
     }
-    else if (!regex.text(nombre_actual)) {
-        corregir_mensaje += "<li> Los nombres solo puede tener letras y espacios entre ellos, también deben empezar con mayúsculas</li>";
+    else if (!regex.test(nombre_actual)) {
+        corregir_mensaje += "<li> Los nombres solo puede tener letras y espacios, también deben empezar con mayúsculas</li>";
         return false;
     }
     return true;
@@ -181,7 +181,7 @@ function validar_estado(clase_estado) {
 function validar_imagenes(clase_imagen) {
     var nodos_lista_imagenes = document.getElementsByClassName(clase_imagen);
     var cantidad_imagenes = nodos_lista_imagenes.length;
-    var regex = /\S*.(?:jpg|jpeg|png)/; // regex imagen
+    var regex = /\S*.(?:jpg|jpeg|png|JPG|JPEG|PNG)/; // regex imagen
     for (nodo of nodos_lista_imagenes) {
         imagen = nodo.value;
         if (imagen.length < 1) {
@@ -225,7 +225,7 @@ function agregar_correcciones() {
 }
 
 function validar_todo() {
-    corregir_mensaje = "";
+    corregir_mensaje = "Corrija los siguientes problemas para enviar el formulario:";
     var resultado = true;
     var check_list = [valida_region("region"), valida_comuna("comuna"), valida_sector("sector"), validar_nombre("nombre"),
     validar_email("email"), validar_celular("celular"), validar_fecha("dia-hora-avistamiento"), validar_tipo("tipo-avistamiento"),
